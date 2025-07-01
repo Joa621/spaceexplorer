@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>2025 Cosmic Explorer</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Bootstrap 5 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <!-- Custom Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Stars Background -->
+  <div id="stars-container" class="fixed top-0 left-0 w-full h-full pointer-events-none"></div>
+
+  <!-- Header -->
+  <header class="py-4 px-6 md:px-12 flex justify-between items-center border-b border-purple-900">
+    <div class="text-3xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-emerald-400">
+      2025 Cosmic Explorer
+    </div>
+    <nav class="hidden md:flex space-x-6">
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="home">Home</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="game">Game</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="collection">Collection</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="about">About</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="apod-page">APOD</button>
+    </nav>
+    <button id="mobile-menu-btn" class="md:hidden text-white text-2xl">☰</button>
+  </header>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-gray-900 p-4 absolute w-full z-40">
+    <div class="flex flex-col space-y-3">
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="home">Home</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="game">Game</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="collection">Collection</button>
+      <button class="nav-link text-gray-300 hover:text-white transition-colors" data-page="about">About</button>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-4 py-8 md:px-12">
+
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-8 min-h-[80vh]">
+        <div class="md:w-1/2">
+          <h1 class="text-4xl md:text-6xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-500 to-emerald-400">
+            Explore the Cosmos in 2025
+          </h1>
+          <p class="text-lg md:text-xl text-gray-300 mb-8">
+            Embark on an interstellar journey through our solar system and beyond.
+            Discover planets, learn cosmic facts, and become the ultimate space explorer.
+          </p>
+          <div class="flex flex-wrap gap-4">
+            <button class="cosmic-btn nav-link" data-page="game">Start Exploring</button>
+            <button class="cosmic-btn bg-gradient-to-r from-gray-700 to-gray-900 nav-link" data-page="about">Learn More</button>
+          </div>
+        </div>
+        <div class="md:w-1/2 flex justify-center">
+          <!-- SVG Solar System Animation -->
+          <svg class="w-full max-w-md" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Sun -->
+            <circle cx="100" cy="100" r="5" fill="#FDB813" class="animate-pulse">
+              <animate attributeName="r" values="5;6;5" dur="3s" repeatCount="indefinite" />
+            </circle>
+            <!-- Orbits -->
+            <circle cx="100" cy="100" r="15" fill="none" stroke="#6D28D9" stroke-width="0.5" stroke-dasharray="2 2">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="100" r="30" fill="none" stroke="#6D28D9" stroke-width="0.5" stroke-dasharray="2 2">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="40s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="100" r="45" fill="none" stroke="#6D28D9" stroke-width="0.5" stroke-dasharray="2 2">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="60s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="100" r="60" fill="none" stroke="#6D28D9" stroke-width="0.5" stroke-dasharray="2 2">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="80s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="100" cy="100" r="75" fill="none" stroke="#6D28D9" stroke-width="0.5" stroke-dasharray="2 2">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="100s" repeatCount="indefinite"/>
+            </circle>
+            <!-- Planets -->
+            <circle cx="115" cy="100" r="2" fill="#3B82F6">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="8s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="130" cy="100" r="3" fill="#10B981">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="12s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="145" cy="100" r="4" fill="#EF4444">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="16s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="160" cy="100" r="5" fill="#F59E0B">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="20s" repeatCount="indefinite"/>
+            </circle>
+            <circle cx="175" cy="100" r="4" fill="#8B5CF6">
+              <animateTransform attributeName="transform" type="rotate" from="0 100 100" to="360 100 100" dur="24s" repeatCount="indefinite"/>
+            </circle>
+          </svg>
+        </div>
+      </div>
+    </section>
+ <!-- ============================================================
+       MY CUSTOM UI REQUIREMENT - Joanna Korban:
+       Responsive planet‐card grid with 3D flip hover effect
+       • Uses Tailwind’s grid (grid-cols-1 md:grid-cols-2 lg:grid-cols-4)
+       • Each .planet-card flips on “Explore” via JS and CSS transform
+       • Smooth transition via transition: transform 0.8s
+  ============================================================ -->
+    <!-- Game Page -->
+    <section id="game" class="page">
+      <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center">Cosmic Explorer Game</h1>
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-lg font-medium">Exploration Progress</span>
+          <span id="progress-text">0/8 Planets</span>
+        </div>
+        <div class="progress-bar mb-8">
+          <div id="progress-fill" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- Mercury -->
+        <div class="planet-card" data-planet="mercury">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#B7B7B7"/>
+                <circle cx="30" cy="30" r="10" fill="#8A8A8A" opacity="0.6"/>
+                <circle cx="60" cy="70" r="15" fill="#8A8A8A" opacity="0.4"/>
+                <circle cx="75" cy="40" r="8" fill="#8A8A8A" opacity="0.5"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Mercury</h3>
+              <p class="text-center text-gray-300">The smallest planet in our solar system</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Mercury Quiz</h3>
+              <p class="mb-4 text-center">What is the average surface temperature on Mercury?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">-100°C</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">430°C</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">150°C</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">1000°C</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Venus -->
+        <div class="planet-card" data-planet="venus">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#E6C073"/>
+                <path d="M30,30 Q50,10 70,30 T90,50 T70,70 T30,70 T10,50 T30,30" fill="#D4AF37" opacity="0.6"/>
+                <circle cx="60" cy="40" r="15" fill="#D4AF37" opacity="0.4"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Venus</h3>
+              <p class="text-center text-gray-300">The hottest planet in our solar system</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Venus Quiz</h3>
+              <p class="mb-4 text-center">How long is a day on Venus?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">24 hours</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">48 hours</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">243 Earth days</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">12 Earth days</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Earth -->
+        <div class="planet-card" data-planet="earth">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#3B82F6"/>
+                <path d="M20,40 Q35,20 50,40 T80,50 T60,70 T30,60 T20,40" fill="#10B981"/>
+                <circle cx="30" cy="30" r="10" fill="white" opacity="0.7"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Earth</h3>
+              <p class="text-center text-gray-300">Our home planet</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Earth Quiz</h3>
+              <p class="mb-4 text-center">What percentage of Earth's surface is covered by water?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">50%</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">60%</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">71%</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">85%</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Mars -->
+        <div class="planet-card" data-planet="mars">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#E34234"/>
+                <circle cx="30" cy="30" r="10" fill="#C1440E" opacity="0.6"/>
+                <circle cx="60" cy="70" r="15" fill="#C1440E" opacity="0.4"/>
+                <circle cx="75" cy="40" r="8" fill="#C1440E" opacity="0.5"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Mars</h3>
+              <p class="text-center text-gray-300">The red planet</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Mars Quiz</h3>
+              <p class="mb-4 text-center">What is the name of the largest volcano on Mars?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">Mount Everest</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Mauna Kea</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">Olympus Mons</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Tharsis Montes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Jupiter -->
+        <div class="planet-card" data-planet="jupiter">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#E59866"/>
+                <path d="M10,50 Q30,30 50,50 T90,50" stroke="#C27BA0" stroke-width="8" fill="none"/>
+                <path d="M10,60 Q30,40 50,60 T90,60" stroke="#D68910" stroke-width="6" fill="none"/>
+                <circle cx="70" cy="30" r="8" fill="#F5B041"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Jupiter</h3>
+              <p class="text-center text-gray-300">The largest planet in our solar system</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Jupiter Quiz</h3>
+              <p class="mb-4 text-center">How many moons does Jupiter have?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">16</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">53</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">79+</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">32</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Saturn -->
+        <div class="planet-card" data-planet="saturn">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <ellipse cx="50" cy="50" rx="30" ry="30" fill="#F7DC6F"/>
+                <ellipse cx="50" cy="50" rx="45" ry="10" fill="none" stroke="#F7DC6F" stroke-width="4"/>
+                <circle cx="60" cy="40" r="5" fill="#D4AC0D" opacity="0.6"/>
+                <circle cx="40" cy="60" r="7" fill="#D4AC0D" opacity="0.4"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Saturn</h3>
+              <p class="text-center text-gray-300">The ringed planet</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Saturn Quiz</h3>
+              <p class="mb-4 text-center">What are Saturn's rings primarily made of?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">Liquid hydrogen</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">Ice and rock particles</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Metallic gases</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Liquid methane</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Uranus -->
+        <div class="planet-card" data-planet="uranus">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#5DADE2"/>
+                <circle cx="30" cy="30" r="10" fill="#3498DB" opacity="0.6"/>
+                <circle cx="60" cy="70" r="15" fill="#3498DB" opacity="0.4"/>
+                <line x1="20" y1="50" x2="80" y2="50" stroke="white" stroke-width="2" opacity="0.5"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Uranus</h3>
+              <p class="text-center text-gray-300">The sideways planet</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Uranus Quiz</h3>
+              <p class="mb-4 text-center">What makes Uranus unique in its rotation?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="false">It doesn't rotate</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">It rotates very quickly</button>
+                <button class="cosmic-btn answer-btn" data-correct="true">It rotates on its side</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">It rotates backwards</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Neptune -->
+        <div class="planet-card" data-planet="neptune">
+          <div class="planet-card-inner">
+            <div class="planet-card-front">
+              <svg class="planet-svg w-32 h-32 mb-4" viewBox="0 0 100 100">
+                <circle cx="50" cy="50" r="45" fill="#2E86C1"/>
+                <path d="M30,50 Q50,30 70,50" stroke="white" stroke-width="2" fill="none" opacity="0.5"/>
+              </svg>
+              <h3 class="text-xl font-bold mb-2">Neptune</h3>
+              <p class="text-center text-gray-300">The windy planet</p>
+              <button class="cosmic-btn mt-4 flip-btn">Explore</button>
+            </div>
+            <div class="planet-card-back">
+              <h3 class="text-xl font-bold mb-4">Neptune Quiz</h3>
+              <p class="mb-4 text-center">Which planet has the strongest winds?</p>
+              <div class="grid grid-cols-1 gap-2 w-full">
+                <button class="cosmic-btn answer-btn" data-correct="true">Neptune</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Jupiter</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Saturn</button>
+                <button class="cosmic-btn answer-btn" data-correct="false">Uranus</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Collection Page -->
+    <section id="collection" class="page">
+      <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center">Your Cosmic Collection</h1>
+      <div class="mb-8">
+        <div class="flex justify-between items-center mb-2">
+          <span class="text-lg font-medium">Collection Progress</span>
+          <span id="collection-progress-text">0/8 Planets</span>
+        </div>
+        <div class="progress-bar">
+          <div id="collection-progress-fill" class="progress-fill" style="width: 0%;"></div>
+        </div>
+      </div>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <!-- badges for each planet -->
+        <div id="mercury-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#B7B7B7"/><circle cx="30" cy="30" r="10" fill="#8A8A8A" opacity="0.6"/></svg>
+          <h3 class="font-bold">Mercury</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="venus-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E6C073"/><path d="M30,30 Q50,10 70,30" fill="#D4AF37" opacity="0.6"/></svg>
+          <h3 class="font-bold">Venus</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="earth-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#3B82F6"/><path d="M20,40 Q35,20 50,40 T80,50" fill="#10B981"/></svg>
+          <h3 class="font-bold">Earth</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="mars-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E34234"/><circle cx="30" cy="30" r="10" fill="#C1440E" opacity="0.6"/></svg>
+          <h3 class="font-bold">Mars</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="jupiter-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E59866"/><path d="M10,50 Q30,30 50,50 T90,50" stroke="#C27BA0" stroke-width="8" fill="none"/></svg>
+          <h3 class="font-bold">Jupiter</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="saturn-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="30" ry="30" fill="#F7DC6F"/><ellipse cx="50" cy="50" rx="45" ry="10" fill="none" stroke="#F7DC6F" stroke-width="4"/></svg>
+          <h3 class="font-bold">Saturn</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="uranus-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#5DADE2"/><line x1="20" y1="50" x2="80" y2="50" stroke="white" stroke-width="2" opacity="0.5"/></svg>
+          <h3 class="font-bold">Uranus</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+        <div id="neptune-badge" class="p-4 rounded-lg bg-gray-800 bg-opacity-50 flex flex-col items-center opacity-50">
+          <svg class="w-16 h-16 mb-2" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#2E86C1"/><path d="M30,50 Q50,30 70,50" stroke="white" stroke-width="2" fill="none" opacity="0.5"/></svg>
+          <h3 class="font-bold">Neptune</h3>
+          <span class="text-xs text-gray-400">Not collected</span>
+        </div>
+      </div>
+    </section>
+     <!-- APOD section right here: -->
+ <section id="apod-page" class="page">
+  <div class="container my-5">
+    <h2 class="text-center mb-4">NASA Astronomy Picture of the Day</h2>
+    <!-- loading, error, and content divs as before -->
+    <div id="apod-loading" class="d-flex justify-content-center">
+      <div class="spinner-border" role="status"><span class="visually-hidden">Loading…</span></div>
+    </div>
+    <div id="apod-content" class="card d-none mx-auto" style="max-width: 600px;">
+      <img id="apod-img" src="" class="card-img-top" alt="NASA APOD">
+      <div class="card-body">
+        <h5 id="apod-title" class="card-title"></h5>
+        <p id="apod-desc" class="card-text"></p>
+      </div>
+    </div>
+  </div>
+  </section>
+
+    <!-- About Page -->
+    <section id="about" class="page">
+      <h1 class="text-3xl md:text-4xl font-bold mb-6 text-center">About Cosmic Explorer</h1>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
+          <h2 class="text-2xl font-bold mb-4">Our Mission</h2>
+          <p class="mb-4">
+            The 2025 Cosmic Explorer program aims to inspire the next generation of space enthusiasts by providing an interactive, educational platform.
+          </p>
+          <p>
+            Through engaging games, quizzes, and beautiful visualizations, we hope to spark curiosity about our solar system and beyond.
+          </p>
+        </div>
+        <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg">
+          <h2 class="text-2xl font-bold mb-4">How It Works</h2>
+          <ol class="list-decimal pl-5 space-y-2">
+            <li>Visit the Game page to start your cosmic journey</li>
+            <li>Click on planets to learn about them and answer quiz questions</li>
+            <li>Correctly answer questions to add planets to your collection</li>
+            <li>Complete your collection to earn your Cosmic Explorer Certificate</li>
+            <li>Share your achievements with friends and family</li>
+          </ol>
+        </div>
+        <div class="bg-gray-800 bg-opacity-50 p-6 rounded-lg md:col-span-2">
+          <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+          <p class="mb-4">Have questions or feedback about the Cosmic Explorer program? We'd love to hear from you!</p>
+          <div class="flex flex-col md:flex-row gap-4">
+            <button id="contact-btn" class="cosmic-btn">Contact Us</button>
+            <button id="privacy-btn" class="cosmic-btn bg-gradient-to-r from-gray-700 to-gray-900">Privacy Policy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="mt-12 py-6 px-6 md:px-12 border-t border-purple-900">
+    <div class="container mx-auto flex flex-col md:flex-row justify-between items-center">
+      <p class="text-gray-400 mb-4 md:mb-0">© 2025 Cosmic Explorer. All rights reserved.</p>
+      <div class="flex space-x-6">
+        <button id="footer-contact" class="text-gray-400 hover:text-white transition-colors">Contact</button>
+        <button id="footer-privacy" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</button>
+        <button id="footer-terms" class="text-gray-400 hover:text-white transition-colors">Terms of Use</button>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Modals -->
+  <!-- Contact Modal -->
+  <div id="contact-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Contact Us</h2>
+      <p class="mb-6">Thank you for your interest in the 2025 Cosmic Explorer program! Please use the information below to get in touch.</p>
+      <div class="space-y-4">
+        <div><h3 class="font-bold">Email</h3><p>joanna_korban@hotmail.com</p></div>
+        <div><h3 class="font-bold">Phone</h3><p>+961 71 736 929</p></div>
+        <div><h3 class="font-bold">Address</h3><p>123 Space Avenue<br>Stellar City, Universe 42</p></div>
+      </div>
+      <div class="mt-6">
+        <h3 class="font-bold mb-2">Send us a message</h3>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-sm mb-1">Name</label>
+            <input type="text" class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" placeholder="Your name">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Email</label>
+            <input type="email" class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white" placeholder="you@example.com">
+          </div>
+          <div>
+            <label class="block text-sm mb-1">Message</label>
+            <textarea class="w-full p-2 rounded bg-gray-700 border border-gray-600 text-white h-32" placeholder="Your message"></textarea>
+          </div>
+          <button class="cosmic-btn w-full">Send Message</button>
+          <p class="text-xs text-gray-400 text-center">This is a demo form. No messages will be sent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Privacy Modal -->
+  <div id="privacy-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Privacy Policy</h2>
+      <div class="space-y-4">
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        <p>Welcome to the 2025 Cosmic Explorer Privacy Policy. This document outlines how we collect, use, and protect your data.</p>
+        <h3 class="text-xl font-bold">Information We Collect</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Game progress and achievements</li>
+          <li>Quiz responses and scores</li>
+          <li>Device information and browser type</li>
+          <li>Usage statistics and interaction data</li>
+        </ul>
+        <h3 class="text-xl font-bold">How We Use Your Information</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Provide and maintain the Cosmic Explorer experience</li>
+          <li>Save your progress and collection status</li>
+          <li>Improve our educational content and UX</li>
+          <li>Generate anonymous usage statistics</li>
+        </ul>
+        <h3 class="text-xl font-bold">Data Security</h3>
+        <p>We implement appropriate security measures to protect your information from unauthorized access, alteration, or destruction.</p>
+        <h3 class="text-xl font-bold">Contact Us</h3>
+        <p>If you have any questions about this Privacy Policy, please contact us at privacy@cosmicexplorer2025.example.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms Modal -->
+  <div id="terms-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2 class="text-2xl font-bold mb-4">Terms of Use</h2>
+      <div class="space-y-4">
+        <p><strong>Last Updated:</strong> January 1, 2025</p>
+        <p>Welcome to the 2025 Cosmic Explorer Terms of Use. By accessing or using our interactive educational platform, you agree to these terms.</p>
+        <h3 class="text-xl font-bold">Educational Use</h3>
+        <p>The Cosmic Explorer platform is designed for educational purposes. All content is provided for informational use only.</p>
+        <h3 class="text-xl font-bold">User Conduct</h3>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Attempt to bypass or manipulate the platform's functionality</li>
+          <li>Use automated systems to access or interact with the platform</li>
+          <li>Share your account or certificate with others</li>
+          <li>Use the platform for any unlawful purpose</li>
+        </ul>
+        <h3 class="text-xl font-bold">Intellectual Property</h3>
+        <p>All content, including text, graphics, logos, and educational materials, is the property of Cosmic Explorer.</p>
+        <h3 class="text-xl font-bold">Changes to Terms</h3>
+        <p>We may update these Terms from time to time. We will notify users of significant changes by posting on this page.</p>
+        <h3 class="text-xl font-bold">Contact Us</h3>
+        <p>If you have any questions about these Terms, please contact us at terms@cosmicexplorer2025.example.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Modal -->
+  <div id="success-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="text-center">
+        <svg class="w-16 h-16 mx-auto mb-4 text-emerald-400" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414L9 13.414l4.707-4.707z" clip-rule="evenodd"/>
+        </svg>
+        <h2 class="text-2xl font-bold mb-2">Correct Answer!</h2>
+        <p id="success-message" class="mb-6">You've added a new planet to your collection!</p>
+        <button id="continue-btn" class="cosmic-btn">Continue Exploring</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Certificate Modal -->
+  <div id="certificate-modal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <div class="text-center">
+        <div class="border-8 border-purple-900 p-8 bg-gradient-to-br from-gray-900 to-gray-800">
+          <h2 class="text-3xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+            Cosmic Explorer Certificate
+          </h2>
+          <p class="mb-6">This certifies that</p>
+          <p class="text-2xl font-bold mb-6">Cosmic Explorer</p>
+          <p class="mb-6">has successfully completed the</p>
+          <p class="text-xl font-bold mb-6 text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-emerald-400">
+            2025 Cosmic Explorer Program
+          </p>
+          <p class="mb-6">by discovering and learning about all eight planets in our solar system</p>
+          <div class="flex justify-center space-x-4 mb-6">
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#B7B7B7"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E6C073"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#3B82F6"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E34234"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#E59866"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><ellipse cx="50" cy="50" rx="30" ry="30" fill="#F7DC6F"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#5DADE2"/></svg>
+            <svg class="w-8 h-8" viewBox="0 0 100 100"><circle cx="50" cy="50" r="45" fill="#2E86C1"/></svg>
+          </div>
+          <p class="text-sm">Date: January 1, 2025</p>
+        </div>
+      <button id="share-certificate" class="cosmic-btn">
+        Share Certificate
+      </button>
+      </div>
+    </div>
+  </div>
+    <!-- Bootstrap 5 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

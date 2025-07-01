@@ -1,0 +1,238 @@
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700&family=Exo+2:wght@300;400;500&display=swap');
+
+:root {
+  --primary: #6d28d9;
+  --secondary: #4c1d95;
+  --accent: #10b981;
+  --background: #0f172a;
+  --text: #f1f5f9;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Exo 2', sans-serif;
+  background-color: var(--background);
+  color: var(--text);
+  background-image:
+    radial-gradient(circle at 20% 35%, rgba(76, 29, 149, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 75% 65%, rgba(16, 185, 129, 0.1) 0%, transparent 50%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Orbitron', sans-serif;
+}
+
+/* Stars Background */
+#stars-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  pointer-events: none;
+  z-index: -1;
+}
+.star {
+  position: absolute;
+  background-color: white;
+  border-radius: 50%;
+  animation: twinkle 4s infinite ease-in-out;
+}
+@keyframes twinkle {
+  0%, 100% { opacity: 0.2; }
+  50%      { opacity: 1; }
+}
+
+/* Cosmic Button (used for "Share Certificate") */
+.cosmic-btn {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  color: #fff;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow:
+    0 4px 6px -1px rgba(0,0,0,0.1),
+    0 2px 4px -1px rgba(0,0,0,0.06);
+}
+.cosmic-btn::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: 0.5s;
+  z-index: -1;
+}
+.cosmic-btn:hover::before { left: 100%; }
+.cosmic-btn:hover {
+  transform: translateY(-2px);
+  box-shadow:
+    0 10px 15px -3 rgba(0,0,0,0.1),
+    0 4px 6px -2 rgba(0,0,0,0.05);
+}
+.cosmic-btn:active { transform: translateY(0); }
+/* ============================================================
+   MY CUSTOM UI REQUIREMENT - Joanna Korban:
+   3D flip hover/interaction for game planet cards
+   • .planet-card-inner uses transition: transform 0.8s
+   • .planet-card.flipped .planet-card-inner { transform: rotateY(180deg); }
+============================================================ */
+/* Planet Card Flip */
+.planet-card {
+  perspective: 1000px;
+  width: 100%;
+  height: 300px;
+  margin-bottom: 1.5rem;
+}
+.planet-card-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.planet-card.flipped .planet-card-inner {
+  transform: rotateY(180deg);
+}
+.planet-card-front,
+.planet-card-back {
+  position: absolute;
+  width: 100%; height: 100%;
+  backface-visibility: hidden;
+  border-radius: 1rem;
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 1.5rem;
+}
+.planet-card-front {
+  background: linear-gradient(145deg, rgba(109,40,217,0.2), rgba(76,29,149,0.4));
+  border: 2px solid rgba(109,40,217,0.3);
+}
+.planet-card-back {
+  background: linear-gradient(145deg, rgba(16,185,129,0.2), rgba(5,150,105,0.4));
+  border: 2px solid rgba(16,185,129,0.3);
+  transform: rotateY(180deg);
+}
+
+/* Progress Bars */
+.progress-bar {
+  width: 100%; height: 24px;
+  background-color: rgba(255,255,255,0.1);
+  border-radius: 6px; overflow: hidden;
+  margin-bottom: 1.5rem;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--accent));
+  border-radius: 6px;
+  transition: width 0.5s ease;
+}
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  z-index: 50;
+  justify-content: center;
+  align-items: center;
+}
+.modal-content {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 2px solid var(--primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%; max-width: 600px;
+  max-height: 80vh; overflow-y: auto;
+  position: relative;
+}
+.close-modal {
+  position: absolute; top: 1rem; right: 1rem;
+  font-size: 1.5rem; cursor: pointer; color: var(--text);
+}
+
+/* Certificate Modal (dark theme) */
+#certificate-modal .modal-content {
+  background: linear-gradient(145deg, #1e293b, #0f172a);
+  border: 2px solid var(--primary);
+  border-radius: 1rem;
+  padding: 2rem;
+  width: 90%; max-width: 600px;
+  max-height: 80vh; overflow-y: auto;
+  position: relative;
+  color: var(--text);
+}
+
+/* APOD Content Card */
+#apod-content {
+  margin: auto;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Page Sections */
+.page {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  padding-top: 4rem;
+}
+.page.active {
+  display: block;
+  opacity: 1;
+}
+
+/* Planet SVG Hover */
+.planet-svg { transition: transform 0.3s ease; }
+.planet-card:hover .planet-svg { transform: scale(1.05) rotate(5deg); }
+
+/* Collected Badge State */
+.collected {
+  border: 2px solid var(--accent) !important;
+  box-shadow: 0 0 15px var(--accent) !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 1.5rem;
+  }
+}
+
+/* Add more space between planet cards in the game grid */
+#game .grid {
+  gap: 1.5rem 1.5rem !important;
+  row-gap: 3.5rem !important;
+}
+
+/* Optionally, add more margin at the bottom of each planet card for extra spacing */
+.planet-card {
+  margin-bottom: 1.5rem;
+}
+
+.quiz-nav {
+  margin-top: 2rem;
+}
+
+/* Make question and answers closer together */
+.question-block p {
+  margin-bottom: 0.5rem !important;
+}
+.grid.grid-cols-1.gap-2.w-full {
+  gap: 0 !important;
+}
+
+/* Move quiz title closer to the top of the card */
+.planet-card-back h3 {
+  margin-bottom: 0.5rem !important;
+  margin-top: 0 !important;
+}
